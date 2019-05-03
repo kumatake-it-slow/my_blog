@@ -1,13 +1,16 @@
 class PostsController < ApplicationController
 
   def index
-    
+    @posts = Post.all
+    @new_posts = Post.all
+    @author = Author.first
   end
 
 
   def show
-  @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
+
   def new
     @post = Post.new
   end
@@ -26,6 +29,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update(post_params)
     redirect_to @post
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
 
 private
